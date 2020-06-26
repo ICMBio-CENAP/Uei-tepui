@@ -1,0 +1,59 @@
+
+   model{
+
+## Define prior distributions for community-level model parameters
+
+omega ~ dunif(0,1)                                # inclusion probability
+
+# coefficients
+mu.alpha.psi ~ dnorm(0, 0.001)
+tau.alpha.psi ~ dgamma(0.1,0.1)
+mua1 ~ dnorm(0, 0.001)
+tau.a1 ~ dgamma(0.1,0.1)
+
+mu.alpha.p ~ dnorm(0, 0.001)
+tau.alpha.p ~ dgamma(0.1,0.1)
+mub1 ~ dnorm(0, 0.001)
+tau.b1 ~ dgamma(0.1,0.1) 
+
+
+for (i in 1:(n+nzeroes)) {
+
+# Create priors for species i from the community level prior distributions
+
+    w[i] ~ dbern(omega)                             # inclusion indicators
+    alpha.psi[i] ~ dnorm(mu.alpha.psi, tau.alpha.psi)
+    a1[i] ~ dnorm(mua1, tau.a1)                     # elevation on psi
+    alpha.p[i] ~ dnorm(mu.alpha.p, tau.alpha.p)
+    b1[i] ~ dnorm(mub1, tau.b1)                     # occasion on p
+
+# Create a loop to estimate the Z matrix (true occurrence for species i at point j)
+   for (j in 1:J) {
+       logit(psi[j,i]) <- alpha.psi[i] + a1[i]*elevation[j]
+
+      mu.psi[j,i] <- psi[j,i]*w[i]
+      Z[j,i] ~ dbern(mu.psi[j,i])
+
+# Create a loop to estimate detection for species i at point j during sampling period k.      
+   for (k in 1:K[j]) {  
+      logit(p[j,k,i]) <-  alpha.p[i] + b1[i]*dates[j,k]
+      
+       mu.p[j,k,i] <- p[j,k,i]*Z[j,i]              # can only be detected if Z=1
+       X[j,k,i] ~ dbern(mu.p[j,k,i])
+
+    }#k
+  }#j
+}#i
+
+# Derived quantities:
+
+# Sum all species observed (n) and unobserved species (n0) to find the total estimated richness
+n0 <- sum(w[(n+1):(n+nzeroes)])
+N <- n + n0
+#N <- sum(w[])
+
+# Create a loop to determine point level richness for the whole community and for subsets of interest
+for(j in 1:J){
+Nsite[j]<- inprod(Z[j,1:(n+nzeroes)],w[1:(n+nzeroes)])
+  }
+}
