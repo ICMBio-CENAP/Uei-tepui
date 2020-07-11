@@ -18,4 +18,4 @@ Por Elildo Carvalho Jr @ICMBio/CENAP
 ```results``` Contém os resultados das análises, como tabelas e figuras. 
 
 # Contato
-Se tiver questões, favor entrar em contato: <elildojr@gmail.com>
+<elildojr@gmail.com>
