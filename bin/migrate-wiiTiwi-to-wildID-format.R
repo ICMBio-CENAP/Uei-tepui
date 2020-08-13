@@ -15,6 +15,7 @@ library(here)
 
 # carregar esse arquivo
 source(here("bin", "camera trap analysis code-WILDID-09-20-17.R"))
+source(here("bin", "time-lag.R"))
 
 # carregar dados
 wiiTiwi <- read.csv(here("data", "images.csv"))
@@ -79,6 +80,17 @@ wiiTiwi$commom_name <- NULL
 wiiTiwi$highlighted <- NULL
 wiiTiwi$color <- NULL
 wiiTiwi$licence <- NULL
+
+# change higher taxonomic levels to uppercase
+wiiTiwi$Class <- toupper(wiiTiwi$Class)
+wiiTiwi$Class[wiiTiwi$Class == "NO CV RESULT"] <- NA
+wiiTiwi$Class[wiiTiwi$Class == "UNKNOWN"] <- NA
+wiiTiwi$Order <- toupper(wiiTiwi$Order)
+wiiTiwi$Order[wiiTiwi$Order == "NO CV RESULT"] <- NA
+wiiTiwi$Order[wiiTiwi$Order == "UNKNOWN"] <- NA
+wiiTiwi$Family <- toupper(wiiTiwi$Family)
+wiiTiwi$Family[wiiTiwi$Family == "NO CV RESULT"] <- NA
+wiiTiwi$Family[wiiTiwi$Family == "UNKNOWN"] <- NA
 
 # reorder columns
 col_order <- c("ID",	"Project.Name",	"Camera.Trap.Name",	"Latitude",	"Longitude",	
