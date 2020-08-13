@@ -51,7 +51,7 @@ wiiTiwi$Person.setting.up.the.Camera <- "Elildo Carvalho Jr"
 
 # add latitude and longitude and start and end dates
 df1 <- distinct(deployments, placename, latitude, longitude, start_date, end_date)
-names(df1) <- c("Camera.Trap.Name", "Latitude", "Longitude", "Camera.Start.Date", "Camera.End.Date")
+names(df1) <- c("Camera.Trap.Name", "Longitude", "Latitude", "Camera.Start.Date", "Camera.End.Date")
 df1$Camera.Trap.Name <- as.factor(df1$Camera.Trap.Name)
 
 # add unify coordinates for all sites-years in the dataset
@@ -88,6 +88,6 @@ col_order <- c("ID",	"Project.Name",	"Camera.Trap.Name",	"Latitude",	"Longitude"
 wiiTiwi <- wiiTiwi[,col_order]
 
 # save as csv
-write.csv(wiiTiwi, here("data", "Wild.ID_UeiTepui.csv"), row.names = FALSE)
+write.csv(wiiTiwi, here("data", "Wild_ID_UeiTepui.csv"), row.names = FALSE)
 
 
