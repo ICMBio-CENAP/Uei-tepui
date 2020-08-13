@@ -87,6 +87,29 @@ col_order <- c("ID",	"Project.Name",	"Camera.Trap.Name",	"Latitude",	"Longitude"
                "Person.Identifying.the.Photo",	"Camera.Serial.Number",	"Camera.Start.Date",	"Camera.End.Date",	"Person.setting.up.the.Camera",	"Person.picking.up.the.Camera",	"Camera.Manufacturer",	"Camera.Model",	"Sequence.Info",	"Moon.Phase",	"Temperature",	"Flash",	"Organization.Name")
 wiiTiwi <- wiiTiwi[,col_order]
 
+# check timelag
+wiiTiwi$Camera.Start.Date <- as.Date(wiiTiwi$Camera.Start.Date)
+wiiTiwi$Camera.End.Date <- as.Date(wiiTiwi$Camera.End.Date)
+wiiTiwi$Photo.Date <- as.Date(wiiTiwi$Photo.Date)
+time.lag(wiiTiwi)
+
+# fix start:
+wiiTiwi[wiiTiwi$Camera.Trap.Name=="MTRR-19",]$Camera.Start.Date <- min(subset(wiiTiwi, Camera.Trap.Name=="MTRR-19")$Photo.Date)
+wiiTiwi[wiiTiwi$Camera.Trap.Name=="MTRR-18",]$Camera.Start.Date <- min(subset(wiiTiwi, Camera.Trap.Name=="MTRR-18")$Photo.Date)
+wiiTiwi[wiiTiwi$Camera.Trap.Name=="MTRR-16",]$Camera.Start.Date <- min(subset(wiiTiwi, Camera.Trap.Name=="MTRR-16")$Photo.Date)
+wiiTiwi[wiiTiwi$Camera.Trap.Name=="MTRR-15",]$Camera.Start.Date <- min(subset(wiiTiwi, Camera.Trap.Name=="MTRR-15")$Photo.Date)
+wiiTiwi[wiiTiwi$Camera.Trap.Name=="MTRR-07",]$Camera.Start.Date <- min(subset(wiiTiwi, Camera.Trap.Name=="MTRR-07")$Photo.Date)
+# fix end:
+wiiTiwi[wiiTiwi$Camera.Trap.Name=="MTRR-22",]$Camera.End.Date <- max(subset(wiiTiwi, Camera.Trap.Name=="MTRR-22")$Photo.Date)
+wiiTiwi[wiiTiwi$Camera.Trap.Name=="MTRR-21",]$Camera.End.Date <- max(subset(wiiTiwi, Camera.Trap.Name=="MTRR-21")$Photo.Date)
+wiiTiwi[wiiTiwi$Camera.Trap.Name=="MTRR-20",]$Camera.End.Date <- max(subset(wiiTiwi, Camera.Trap.Name=="MTRR-20")$Photo.Date)
+wiiTiwi[wiiTiwi$Camera.Trap.Name=="MTRR-19",]$Camera.End.Date <- max(subset(wiiTiwi, Camera.Trap.Name=="MTRR-19")$Photo.Date)
+wiiTiwi[wiiTiwi$Camera.Trap.Name=="MTRR-16",]$Camera.End.Date <- max(subset(wiiTiwi, Camera.Trap.Name=="MTRR-16")$Photo.Date)
+wiiTiwi[wiiTiwi$Camera.Trap.Name=="MTRR-11",]$Camera.End.Date <- max(subset(wiiTiwi, Camera.Trap.Name=="MTRR-11")$Photo.Date)
+wiiTiwi[wiiTiwi$Camera.Trap.Name=="MTRR-10",]$Camera.End.Date <- max(subset(wiiTiwi, Camera.Trap.Name=="MTRR-10")$Photo.Date)
+wiiTiwi[wiiTiwi$Camera.Trap.Name=="MTRR-05",]$Camera.End.Date <- max(subset(wiiTiwi, Camera.Trap.Name=="MTRR-05")$Photo.Date)
+time.lag(wiiTiwi) # check
+
 # save as csv
 write.csv(wiiTiwi, here("data", "Wild_ID_UeiTepui.csv"), row.names = FALSE)
 
