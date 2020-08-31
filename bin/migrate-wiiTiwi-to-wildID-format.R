@@ -99,6 +99,13 @@ col_order <- c("ID",	"Project.Name",	"Camera.Trap.Name",	"Latitude",	"Longitude"
                "Person.Identifying.the.Photo",	"Camera.Serial.Number",	"Camera.Start.Date",	"Camera.End.Date",	"Person.setting.up.the.Camera",	"Person.picking.up.the.Camera",	"Camera.Manufacturer",	"Camera.Model",	"Sequence.Info",	"Moon.Phase",	"Temperature",	"Flash",	"Organization.Name")
 wiiTiwi <- wiiTiwi[,col_order]
 
+# check dates
+sort(unique((wiiTiwi$Camera.Start.Date)))
+sort(unique((wiiTiwi$Camera.End.Date)))
+sort(unique((wiiTiwi$Photo.Date)))
+wiiTiwi <- subset(wiiTiwi, Photo.Date >= "2019-10-30") # remove wrong dates
+
+
 # check timelag
 wiiTiwi$Camera.Start.Date <- as.Date(wiiTiwi$Camera.Start.Date)
 wiiTiwi$Camera.End.Date <- as.Date(wiiTiwi$Camera.End.Date)
@@ -106,11 +113,9 @@ wiiTiwi$Photo.Date <- as.Date(wiiTiwi$Photo.Date)
 time.lag(wiiTiwi)
 
 # fix start:
-wiiTiwi[wiiTiwi$Camera.Trap.Name=="MTRR-19",]$Camera.Start.Date <- min(subset(wiiTiwi, Camera.Trap.Name=="MTRR-19")$Photo.Date)
 wiiTiwi[wiiTiwi$Camera.Trap.Name=="MTRR-18",]$Camera.Start.Date <- min(subset(wiiTiwi, Camera.Trap.Name=="MTRR-18")$Photo.Date)
 wiiTiwi[wiiTiwi$Camera.Trap.Name=="MTRR-16",]$Camera.Start.Date <- min(subset(wiiTiwi, Camera.Trap.Name=="MTRR-16")$Photo.Date)
 wiiTiwi[wiiTiwi$Camera.Trap.Name=="MTRR-15",]$Camera.Start.Date <- min(subset(wiiTiwi, Camera.Trap.Name=="MTRR-15")$Photo.Date)
-wiiTiwi[wiiTiwi$Camera.Trap.Name=="MTRR-07",]$Camera.Start.Date <- min(subset(wiiTiwi, Camera.Trap.Name=="MTRR-07")$Photo.Date)
 # fix end:
 wiiTiwi[wiiTiwi$Camera.Trap.Name=="MTRR-22",]$Camera.End.Date <- max(subset(wiiTiwi, Camera.Trap.Name=="MTRR-22")$Photo.Date)
 wiiTiwi[wiiTiwi$Camera.Trap.Name=="MTRR-21",]$Camera.End.Date <- max(subset(wiiTiwi, Camera.Trap.Name=="MTRR-21")$Photo.Date)

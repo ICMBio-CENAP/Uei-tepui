@@ -18,10 +18,10 @@ source(here("bin", "camera trap analysis code-WILDID-09-20-17.R"))
 source(here("bin", "funcao-para-grafico-composto.R"))
 
 # carregar dados
-wiiTiwi <- read.csv(here("data", "images.csv"))
-deployments <- read.csv(here("data", "deployments.csv"))
-elevation <- read.csv(here("data", "elevation_uei_tepui.csv"))
-
+#wiiTiwi <- read.csv(here("data", "images.csv"))
+#deployments <- read.csv(here("data", "deployments.csv"))
+#elevation <- read.csv(here("data", "elevation_uei_tepui.csv"))
+wiiTiwi <- f.readin.fix.data(here("data", "Wild_ID_UeiTepui.csv"))
 
 # How many rows and columns?
 dim(wiiTiwi)
@@ -31,11 +31,11 @@ head(wiiTiwi)
 #View(wiiTiwi)
 
 # nova coluna bin
-wiiTiwi$bin <- paste(wiiTiwi$genus, wiiTiwi$species, sep=" ")
+#wiiTiwi$bin <- paste(wiiTiwi$genus, wiiTiwi$species, sep=" ")
 # nova coluna Photo.Date
-wiiTiwi$Photo.Date <- as.Date(substr(wiiTiwi$timestamp, start = 1, stop = 10))
+#wiiTiwi$Photo.Date <- as.Date(substr(wiiTiwi$timestamp, start = 1, stop = 10))
 # nova coluna td.photo
-wiiTiwi$td.photo <- as.POSIXct(wiiTiwi$timestamp)
+#wiiTiwi$td.photo <- as.POSIXct(wiiTiwi$timestamp)
 #Remove Homo and Canis
 wiiTiwi <- subset(wiiTiwi, bin != "Homo sapiens" & bin != "Canis " & bin != "Canis lupus familiaris" & bin != "Proechimys ")
 # fix some species names
@@ -47,32 +47,36 @@ wiiTiwi$bin[wiiTiwi$bin == "Nasuella "] <- "Nasua nasua"
 wiiTiwi$bin[wiiTiwi$bin == "Didelphis "] <- "Didelphis imperfecta"
 
 # Which photo types do we have?
-table(wiiTiwi$class)
+table(wiiTiwi$Class)
 table(wiiTiwi$bin)
 
 # Only work with mammal photos
-wiiTiwi <- filter(wiiTiwi, class == "Mammalia")
+wiiTiwi <- filter(wiiTiwi, Class == "MAMMALIA")
 
 # Group by events that are 30 minutes apart
 wiiTiwi <- f.separate.events(wiiTiwi, 30)
-wiiTiwi <- distinct(wiiTiwi, deployment_id, bin, grp, .keep_all = TRUE)
+wiiTiwi <- distinct(wiiTiwi, Camera.Trap.Name, bin, grp, .keep_all = TRUE)
 
 # Number of images per camera trap
-imgsPerCT <- wiiTiwi %>% group_by(deployment_id) %>% summarize(n = n()) %>% arrange(desc(n))
+imgsPerCT <- wiiTiwi %>% group_by(Camera.Trap.Name) %>% summarize(n = n()) %>% arrange(desc(n))
 imgsPerCT
 
 # plot n. photos versus elevation
-df1 <- merge(imgsPerCT, elevation, "deployment_id", sort = TRUE)
+elevation <- read.csv(here("data", "elevation_uei_tepui.csv")) # load elevation
+elevation$Camera.Trap.Name <- substr(elevation$deployment_id, 1, 7)
+df1 <- merge(imgsPerCT, elevation, "Camera.Trap.Name", sort = TRUE)
 with(df1, plot(elevation, n))
 
 # Effort per camera trap
-df2 <- merge(wiiTiwi, deployments, "deployment_id", sort = TRUE)
-df2$effort = as.numeric( as.Date(df2$end_date) - as.Date(df2$start_date) )
-effortPerCT <- distinct(df2, deployment_id, effort, .keep_all = FALSE)
-effortPerCT <- merge(imgsPerCT, effortPerCT, "deployment_id", sort = TRUE)
+#df2 <- merge(wiiTiwi, deployments, "Camera.Trap.Name", sort = TRUE)
+#df2$effort = as.numeric( as.Date(df2$end_date) - as.Date(df2$start_date) )
+df2 <- wiiTiwi
+df2$effort = as.numeric( as.Date(df2$End.Date) - as.Date(df2$Start.Date) )
+effortPerCT <- distinct(df2, Camera.Trap.Name, effort, .keep_all = FALSE)
+effortPerCT <- merge(imgsPerCT, effortPerCT, "Camera.Trap.Name", sort = TRUE)
 effortPerCT$n.corrected <- effortPerCT$n / effortPerCT$effort
 
-df3 <- merge(df1, effortPerCT, "deployment_id", sort = TRUE)
+df3 <- merge(df1, effortPerCT, "Camera.Trap.Name", sort = TRUE)
 
 #------------------
 mod1 <- glm(n.corrected~elevation, data=df3)
@@ -113,13 +117,13 @@ dev.off()
 
 ## ----plot deployment in time---------------------------------------------
 # First create a table
-tabCTN_PD <- with(wiiTiwi, table(deployment_id, Photo.Date))
+tabCTN_PD <- with(wiiTiwi, table(Camera.Trap.Name, Photo.Date))
 head(tabCTN_PD)
 #Get it ready for ggplot
 tabCTN_PD <- melt(tabCTN_PD)
 
 #Plot it
-p <- ggplot(tabCTN_PD, aes(y = deployment_id, x = Photo.Date)) + geom_raster(aes(fill=value), alpha = 0.8) + theme(axis.text.x = element_text(angle = 90, hjust = 1))
+p <- ggplot(tabCTN_PD, aes(y = Camera.Trap.Name, x = Photo.Date)) + geom_raster(aes(fill=value), alpha = 0.8) + theme(axis.text.x = element_text(angle = 90, hjust = 1))
 p
 
 ##---- Species richness analysis---------------------------
@@ -132,7 +136,7 @@ imgsPerSp
 write.csv(imgsPerSp, here("results", "imgsPerSp.csv"))
 
 # how many sites each species appeared
-spPerSite <- data.matrix(table(wiiTiwi$bin, wiiTiwi$deployment_id))
+spPerSite <- data.matrix(table(wiiTiwi$bin, wiiTiwi$Camera.Trap.Name))
 spPerSite[spPerSite > 0] <- 1
 spPerSite <- cbind(rownames(spPerSite), rowSums(spPerSite))
 
@@ -179,17 +183,17 @@ dev.off()
 ## gradient figure
 
 # matrix by site
-spMatrixBySite <- as.data.frame.matrix(with(wiiTiwi, table(deployment_id,bin)))
+spMatrixBySite <- as.data.frame.matrix(with(wiiTiwi, table(Camera.Trap.Name,bin)))
 spMatrixBySite <- spMatrixBySite[order(rownames(spMatrixBySite)),] # order by camera trap name
 names(spMatrixBySite)
 spMatrixBySite[1:19, 1:2]
 
 # We just need cameras that worked. Which ones are they?
-suWiiTiwi <- unique(wiiTiwi$deployment_id)
+suWiiTiwi <- unique(wiiTiwi$Camera.Trap.Name)
 
 # filter our covariate (elevation) file
-elevation2 <- filter(elevation, deployment_id %in% suWiiTiwi)
-rownames(elevation2) <- elevation2$deployment_id
+elevation2 <- filter(elevation, Camera.Trap.Name %in% suWiiTiwi)
+rownames(elevation2) <- elevation2$Camera.Trap.Name
 elevation2 <- elevation2[order(rownames(elevation2)),] # order by camera trap name
 
 # use "generico" function
