@@ -1,6 +1,6 @@
 ---
 title: Mamíferos de médio e grande porte da Serra do Sol, Parque Nacional do Monte
-  Roraima^[*Agradecimentos* - Este trabalho não teria sido possível sem a hospitalidade e colaboração dos Ingarikós da aldeia Caramambatai, em especial Dionísio e Lárames Ingarikó. O estudo foi financiado pelo programa Áreas Protegidas da Amazônia – ARPA.]
+  Roraima^[*Agradecimentos* - Este trabalho não teria sido possível sem a hospitalidade e colaboração dos Ingarikós da aldeia Caramambatai. Agradecemos especialmente a Dionísio e Lárames Ingarikó, que tiveram participação essencial no levantamento da mastofauna. O estudo foi financiado pelo programa Áreas Protegidas da Amazônia – ARPA.]
 author: "Elildo Carvalho Jr^1^, Anésio C. Marques^2^, Marcelo L. Reis^3^, Thiago O. Laranjeiras^4^"
 date: "^1^Centro Nacional de Pesquisa e Conservação de Mamíferos Carnívoros - ICMBio/CENAP, elildo.carvalho-junior@icmbio.gov.br; ^2^ICMBio/Parque Nacional das Sempre-Vivas, ^3^Consultor independente, ^4^ICMBio/RR/AT-PEQ"
 
@@ -11,6 +11,7 @@ output:
     df_print: paged
 
 bibliography: "/home/elildojr/Documents/r/Uei-tepui/docs/bibliography.bib"
+csl: "http://www.zotero.org/styles/biological-conservation"
 ---
 \renewcommand{\figurename}{Figura}
 \renewcommand{\tablename}{Tabela}
@@ -44,7 +45,7 @@ knitr::kable(
 #kable_styling() %>% footnote(symbol = "Registrada somente nos censos")
 ```
 
-Devido à dificuldades de identificação, algumas espécies foram identificadas somente até o gênero e foram assim agrupadas na tabela 1. Por exemplo, embora duas espécies de veados (*Mazama* spp.) tenham sido registradas, a maioria dos registros foi agrupada no nível genérico. Todas as mucuras foram agrupadas como *Didelphis* spp., embora o Pantepui abrigue duas espécies, *D. marsupialis* e *D. imperfecta* [@gardner2008mammals; @Hershkovitz1969; @Lew2019]⁠, que podem ocorrer em simpatria [@Catzeflis2009]⁠. No topo da Serra do Sol, foram registrados quatis com aparência pouco usual (Fig. 3). Estes foram tentativamente agrupados com Nasua nasua, mas a elucidação de sua identidade merece atenção (ver seção Espécies de especial interesse para a conservação).
+Devido à dificuldades de identificação, algumas espécies foram identificadas somente até o gênero e foram assim agrupadas na tabela 1. Por exemplo, embora duas espécies de veados (*Mazama* spp.) tenham sido registradas, a maioria dos registros foi agrupada no nível genérico. Todas as mucuras foram agrupadas como *Didelphis* spp., embora o Pantepui abrigue duas espécies, *D. marsupialis* e *D. imperfecta* [@gardner2008mammals; @Hershkovitz1969; @Lew2019]⁠, que podem ocorrer em simpatria [@Catzeflis2009]⁠. No topo da Serra do Sol, foram registrados quatis com aparência pouco usual (Fig. 3). Estes foram tentativamente agrupados com *Nasua nasua*, mas a elucidação de sua identidade merece atenção (ver seção Espécies de especial interesse para a conservação).
 
 ![Quati registrado no topo da Serra do Sol.](/home/elildojr/Documents/r/Uei-tepui/results/Fig_8.png)
 
@@ -77,11 +78,11 @@ No topo da Serra do Sol foram registrados quatis com fenótipo pouco usual, incl
 
 ## Conclusões e recomendações
 
-Este é o primeiro levantamento sistemático dos mamíferos de médio e grande porte (> 1 kg) do Parque Nacional do Monte Roraima e, mais especificamente, da Serra do Sol, tirante o estudo de [@Tate1939]⁠. No total, foram registradas oito ordens, 12 famílias e 16 espécies de mamíferos de médio e grande porte. Até o momento, foram registradas somente três espécies ameaçadas de extinção. No entanto, como indica a curva de acumulação de espécies, a ocorrência de espécies adicionais é certa e novos registros provavelmente ocorrrerão no futuro próximo. Por essa razão, recomendamos que sejam feitos inventários adicionais para aumentar o conhecimento sobre a mastofauna local.
+Este é o primeiro levantamento sistemático dos mamíferos de médio e grande porte (> 1 kg) do Parque Nacional do Monte Roraima e, mais especificamente, da Serra do Sol, tirante o estudo de Tate [@Tate1939]⁠. No total, foram registradas oito ordens, 12 famílias e 16 espécies de mamíferos de médio e grande porte. Até o momento, foram registradas somente três espécies ameaçadas de extinção. No entanto, como indica a curva de acumulação de espécies, a ocorrência de espécies adicionais é certa e novos registros provavelmente ocorrrerão no futuro próximo. Por essa razão, recomendamos que sejam feitos inventários adicionais para aumentar o conhecimento sobre a mastofauna local.
 
 A maioria das espécies registradas é amplamente distribuída nos Neotropicos e nenhuma espécie é endêmica. No entanto, foram registrados quatis com caracteres pouco usuais para *Nasua nasua*. O mais provável é que, apesar de fugirem do padrão, estes quattis se enquadrem dentro do amplo espectro de tamanho e coloração conhecidas para a espécie. Ainda assim, não se pode descartar por completo a possibilidade de eles pertencerem a uma nova espécie ou subespécie. Portanto, recomendamos que sejam feitos esforços específicos visando elucidar sua identidade.
 
-Não foram observadas ameaaças diretas à mastofauna da Serra do Sol. A área é remota, a cobertura vegetal é bem preservada e a população humana é pequena e esparsa. Embora os Ingarikós possuam roças e trilhas de caça na área de estudo, a aldeia é pequena e o número de caçadores é provavelmente insuficiente para causar depleção significativa nas populações de mamíferos em área tão remota e vasta. Ainda assim, pode ser interessante trabalhar com ins Ingarikós num estudo etnoecológico, visando conhecer melhor seus padrões de uso da fauna e aproveitar seu profundo conhecimento sobre o ambiente local para ampliar o conhecimento cientĩfico sobre os mamíferos do parque.
+Não foram observadas ameaças diretas à mastofauna da Serra do Sol. A área é remota, a cobertura vegetal é bem preservada e a população humana é pequena e esparsa. Embora os Ingarikós possuam roças e trilhas de caça na área de estudo, a aldeia é pequena e o número de caçadores é provavelmente insuficiente para causar depleção significativa nas populações de mamíferos em área tão remota e vasta. Ainda assim, pode ser interessante trabalhar com ins Ingarikós num estudo etnoecológico, visando conhecer melhor seus padrões de uso da fauna e aproveitar seu profundo conhecimento sobre o ambiente local para ampliar o conhecimento cientĩfico sobre os mamíferos do parque.
 
 ## Literatura citada
 
