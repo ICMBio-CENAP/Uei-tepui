@@ -3,18 +3,25 @@ title: Mamíferos de médio e grande porte da Serra do Sol, Parque Nacional do M
   Roraima^[*Agradecimentos* - Este trabalho não teria sido possível sem a hospitalidade e colaboração dos Ingarikós da aldeia Caramambatai. Agradecemos especialmente a Dionísio e Lárames Ingarikó, que tiveram participação essencial no levantamento da mastofauna. O estudo foi financiado pelo programa Áreas Protegidas da Amazônia – ARPA.]
 author: "Elildo Carvalho Jr^1^, Anésio C. Marques^2^, Marcelo L. Reis^3^, Thiago O. Laranjeiras^4^"
 date: "^1^Centro Nacional de Pesquisa e Conservação de Mamíferos Carnívoros - ICMBio/CENAP, elildo.carvalho-junior@icmbio.gov.br; ^2^ICMBio/Parque Nacional das Sempre-Vivas, ^3^Consultor independente, ^4^ICMBio/RR/AT-PEQ"
-
 output:
   pdf_document:
     latex_engine: xelatex
   html_document:
     df_print: paged
-
 bibliography: "/home/elildojr/Documents/r/Uei-tepui/docs/bibliography.bib"
 csl: "http://www.zotero.org/styles/biological-conservation"
+linestretch: 1.5
+header-includes:
+- \usepackage{fancyhdr}
+- \usepackage{lastpage}
+  \fancyfoot{}
 ---
 \renewcommand{\figurename}{Figura}
 \renewcommand{\tablename}{Tabela}
+\pagestyle{fancy}
+\fancyhead[CO,CE]{ICMBio/CENAP: Mamíferos da Serra do Sol}
+\fancyhead[R]{\thepage}
+
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
@@ -38,10 +45,12 @@ O estudo foi conduzido na  na Serra do Sol (Wîi-tîwî , Weitipu ou Uei-tepui),
 
 No total, foram obtidas 1135 fotos de animais, sendo 521 de aves e 614 de mamíferos. O anexo 1 apresenta fotos de todos os mamíferos registrados e o anexo 2 um breve sumário dos resultados para as aves; o restante deste relatório tratará somente dos resultados do armadilhamento fotográfico para os mamíferos. As fotos de mamíferos corresponderam a 142 registros independentes (> 30 minutos) de pelo menos 15 espécies de mamíferos de médio e grande porte (Tabela 1). Os censos resultaram em pouquíssimos avistamentos, mas acrescentaram uma espécie de primata à lista, elevando o total de espécies para 16 (Tabela 1).
 
+
 ```{r, echo=FALSE}
+#library(kableExtra)
 knitr::kable(
   read.csv("/home/elildojr/Documents/r/Uei-tepui/results/table1.csv"), caption = 'Mamíferos de médio e grande porte registrados na Serra do Sol, PARNA do Monte Roraima, número de fotos e de registros independentes por espécie, e número de estações amostrais em que cada espécie foi registrada. '
-)
+) 
 #kable_styling() %>% footnote(symbol = "Registrada somente nos censos")
 ```
 
@@ -65,7 +74,7 @@ Quatro espécies de herbívoros foram particularmente abundantes, representando 
 
 ![Número de registros independentes por espécie no no Wîi-tîî, Parque Nacional do Monte Roraima.](/home/elildojr/Documents/r/Uei-tepui/results/imgsPerSP.jpg){ width=75% }
 
-No que se refere à distribuição das espécies, foi observado um turnover na abundância das espécies ao longo do gradiente de elevação (Fig. 8). Algumas espécies, como a cutia e a paca, foram mais abundantes em elevações baixas a intermediárias; outras, como os veados, se distribuíram por praticamente todo o gradiente; finalmente, espécies como os quatis (*Nasua nasua*) e antas (*Tapirus terrestris*) foram mais comuns em elevações intermediárias a altas.
+No que se refere à distribuição das espécies, foi observado um *turnover* na abundância das espécies ao longo do gradiente de elevação (Fig. 8). Algumas espécies, como a cutia e a paca, foram mais abundantes em elevações baixas a intermediárias; outras, como os veados, se distribuíram por praticamente todo o gradiente; finalmente, espécies como os quatis (*Nasua nasua*) e antas (*Tapirus terrestris*) foram mais comuns em elevações intermediárias a altas.
 
 ![Número de registros por espécie em relação à elevação das estações de amostragem.](/home/elildojr/Documents/r/Uei-tepui/results/grad_elevacao.jpg){ width=75% }
 
@@ -73,16 +82,16 @@ No que se refere à distribuição das espécies, foi observado um turnover na a
 
 Dentre as espécies registradas, três constam da  Lista Nacional Oficial de Espécies da Fauna Ameaçadas de Extinção (portaria MMA 444/2014): anta, onça-pintada (*Panthera onca*) e puma (*Puma concolor*). Nenhuma das espécies registradas é endêmica do Parque Nacional do Monte Roraima ou do Pantepui, o que é esperado, pois o Pantepui abriga poucos endemismos de mamíferos: apenas sete espécies, todas de pequeno porte [@Lew2019; @Voss2013].
 
-No topo da Serra do Sol foram registrados quatis com fenótipo pouco usual, incluindo coloração escura uniforme (esbranquiçada na região peitoral e ventral), focinho e cauda mais curtos do que o usual, e porte relativamente menor (Fig. 3). Nestes aspectos, os indivíduos se assemelham aos quatis-da-montanha do gênero *Nasuella*, endêmicos da cordilheira dos Andes [@Helgen2009]⁠. Infelizmente, as imagens não permitem uma determinação segura da espécie. O mais provável é que esses indivíduos sejam meros variantes do amplo espectro de tamanho e coloração frequentemente observados em *Nasua* [@Decker1991]⁠. Ampla variação é comum dentro de uma mesma população ou mesmo numa mesma ninhada [@Decker1991; @Gompper1998]⁠, e já foi observada, por exemplo, no Auyantepuy [@Tate1939]. Por outro lado, não se pode descartar por completo a possibilidade de que os indivíduos do topo da Serra do Sol sejam relacionados com *Nasuella*. Apesar da enorme distância separando a Serra do Sol dos limites da distribuição atual do gênero, modelos bioclimáticos indicam que a área de estudo possui alta adequabilidade ambiental para o gênero [@Helgen2009]⁠, além disso, houve continuidade nas condições climáticas entre a cordilheira dos Andes e o Pantepui durante o último máximo glacial [@Gutierrez2015]⁠, o que viabilizaria a dispersão de indivíduos nesse período, embora, como contraponto, seja relevante notar a total falta de registros em qualquer outro tepui, tornando um registro de *Nasuella* na serra do sol ainda mais inesperado dado que outros tepuis já foram mais explorados. Por outro lado, o fato de indivíduos inconfundivelmente pertencentes a *Nasua nasua* terem sido registrados na Serra do Sol não descarta a possibilidade de que a área abrigue duas espécies, já que *Nasua* e *Nasuella* podem ocorrer em simpatria [@Mena2019]⁠. Finalmente, os indivíduos observados no topo da Serra do Sol não se assemelham em nada ao *Nasua nasua vittata*, a subespécie de quati do topo do Monte Roraima [@HavelkovaP.Robovsky.AudyM.DizadePascual2006]. O ponto principal é que a elucidação da identidade taxonômica dos quatis da Serra do Sol merece atenção especial em levantamentos futuros.
+No topo da Serra do Sol foram registrados quatis com fenótipo pouco usual, incluindo coloração escura uniforme (esbranquiçada na região peitoral e ventral), focinho e cauda mais curtos do que o usual, e porte relativamente menor (Fig. 3). Nestes aspectos, os indivíduos se assemelham aos quatis-da-montanha do gênero *Nasuella*, endêmicos da cordilheira dos Andes [@Helgen2009]⁠. Infelizmente, as imagens não permitem uma determinação segura da espécie. O mais provável é que esses indivíduos sejam meros variantes do amplo espectro de tamanho e coloração frequentemente observados em *Nasua* [@Decker1991]⁠. Ampla variação é comum dentro de uma mesma população ou mesmo numa mesma ninhada [@Decker1991; @Gompper1998]⁠, e já foi observada, por exemplo, no Auyantepuy [@Tate1939]. Por outro lado, não se pode descartar por completo a possibilidade de que os indivíduos do topo da Serra do Sol sejam relacionados com *Nasuella*. Apesar da enorme distância separando a Serra do Sol dos limites da distribuição atual do gênero, modelos bioclimáticos indicam que a área de estudo possui alta adequabilidade ambiental para o gênero [@Helgen2009]⁠, além disso, houve continuidade nas condições climáticas entre a cordilheira dos Andes e o Pantepui durante o último máximo glacial [@Gutierrez2015]⁠, o que viabilizaria a dispersão de indivíduos nesse período, embora, como contraponto, seja relevante notar a total falta de registros em qualquer outro tepui, tornando um registro de *Nasuella* na Serra do Sol ainda mais inesperado dado que outros tepuis já foram mais explorados. Por outro lado, o fato de indivíduos inconfundivelmente pertencentes a *Nasua nasua* terem sido registrados na Serra do Sol não descarta a possibilidade de que a área abrigue duas espécies, já que *Nasua* e *Nasuella* podem ocorrer em simpatria [@Mena2019]⁠. Finalmente, os indivíduos observados no topo da Serra do Sol não se assemelham em nada ao *Nasua nasua vittata*, a subespécie de quati do topo do Monte Roraima [@HavelkovaP.Robovsky.AudyM.DizadePascual2006]. O ponto principal é que a elucidação da identidade taxonômica dos quatis da Serra do Sol merece atenção especial em levantamentos futuros.
 
 
 ## Conclusões e recomendações
 
 Este é o primeiro levantamento sistemático dos mamíferos de médio e grande porte (> 1 kg) do Parque Nacional do Monte Roraima e, mais especificamente, da Serra do Sol, tirante o estudo de Tate [@Tate1939]⁠. No total, foram registradas oito ordens, 12 famílias e 16 espécies de mamíferos de médio e grande porte. Até o momento, foram registradas somente três espécies ameaçadas de extinção. No entanto, como indica a curva de acumulação de espécies, a ocorrência de espécies adicionais é certa e novos registros provavelmente ocorrrerão no futuro próximo. Por essa razão, recomendamos que sejam feitos inventários adicionais para aumentar o conhecimento sobre a mastofauna local.
 
-A maioria das espécies registradas é amplamente distribuída nos Neotropicos e nenhuma espécie é endêmica. No entanto, foram registrados quatis com caracteres pouco usuais para *Nasua nasua*. O mais provável é que, apesar de fugirem do padrão, estes quattis se enquadrem dentro do amplo espectro de tamanho e coloração conhecidas para a espécie. Ainda assim, não se pode descartar por completo a possibilidade de eles pertencerem a uma nova espécie ou subespécie. Portanto, recomendamos que sejam feitos esforços específicos visando elucidar sua identidade.
+A maioria das espécies registradas é amplamente distribuída nos Neotropicos e nenhuma espécie é endêmica. No entanto, foram registrados quatis com caracteres pouco usuais para *Nasua nasua*. O mais provável é que, apesar de fugirem do padrão, estes quatis se enquadrem dentro do amplo espectro de tamanho e coloração conhecidas para a espécie. Ainda assim, não se pode descartar por completo a possibilidade de eles pertencerem a uma nova espécie ou subespécie. Portanto, recomendamos que sejam feitos esforços específicos visando elucidar sua identidade.
 
-Não foram observadas ameaças diretas à mastofauna da Serra do Sol. A área é remota, a cobertura vegetal é bem preservada e a população humana é pequena e esparsa. Embora os Ingarikós possuam roças e trilhas de caça na área de estudo, a aldeia é pequena e o número de caçadores é provavelmente insuficiente para causar depleção significativa nas populações de mamíferos em área tão remota e vasta. Ainda assim, pode ser interessante trabalhar com ins Ingarikós num estudo etnoecológico, visando conhecer melhor seus padrões de uso da fauna e aproveitar seu profundo conhecimento sobre o ambiente local para ampliar o conhecimento cientĩfico sobre os mamíferos do parque.
+Não foram observadas ameaças diretas à mastofauna da Serra do Sol. A área é remota, a cobertura vegetal é bem preservada e a população humana é pequena e esparsa. Embora os Ingarikós possuam roças e trilhas de caça na área de estudo, a aldeia é pequena e o número de caçadores é provavelmente insuficiente para causar depleção significativa nas populações de mamíferos em área tão remota e vasta. Ainda assim, pode ser interessante trabalhar com os Ingarikós num estudo etnoecológico, visando conhecer melhor seus padrões de uso da fauna e aproveitar seu profundo conhecimento sobre o ambiente local para ampliar o conhecimento cientĩfico sobre os mamíferos do parque.
 
 ## Literatura citada
 
