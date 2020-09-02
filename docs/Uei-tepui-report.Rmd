@@ -27,6 +27,7 @@ header-includes:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+
 ## Apresentação
 
 Este relatório sumariza os resultados de um inventário da mastofauna do Parque Nacional do Monte Roraima. O inventário foi realizado no contexto de uma expedição científica multidisciplinar ao parque, realizada entre novembro e dezembro de 2019. O objetivo geral da expedição foi inventariar a biodiversidade das florestas montanas (acima de 1000 metros de elevação) protegidas pelo parque, para subsidiar estratégias de conservação e ações de gestão. O trabalho contribui para o conhecimento sobre a composição e distribuição da fauna do parque, ainda pouco conhecida [@IBAMA2000].
@@ -95,3 +96,9 @@ Não foram observadas ameaças diretas à mastofauna da Serra do Sol. A área é
 
 ## Literatura citada
 
+
+```{r, child='Appendix1.Rmd'}
+```
+
+```{r, child='Appendix2.Rmd'}
+```

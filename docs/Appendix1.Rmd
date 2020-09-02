@@ -1,0 +1,12 @@
+---
+title: "Appendix1"
+author: "Elildo Carvalho Jr"
+date: "9/2/2020"
+output: pdf_document
+---
+\newpage
+
+## Anexo 1: Fotos das espécies registradas
+
+Multiple figures, see: https://bookdown.org/yihui/rmarkdown-cookbook/latex-subfigure.html#latex-subfigure
+

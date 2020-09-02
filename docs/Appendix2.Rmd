@@ -1,0 +1,30 @@
+---
+title: "Appendix1"
+author: "Elildo Carvalho Jr"
+date: "9/2/2020"
+output: pdf_document
+---
+
+\newpage
+# Anexo 2: Aves
+
+As amostragens com armadilhas fotográficas resultaram em 521 fotos de aves, corresspondendo a 102 registros independentes de pelo menos 15 espécies de aves de seis ordens e nove famílias (Tabela 1).
+
+
+```{r, echo=FALSE}
+#library(kableExtra)
+knitr::kable(
+  read.csv("/home/elildojr/Documents/r/Uei-tepui/results/tableAppendix.csv"), caption = 'Aves registradas com armadilhas fotográficas na Serra do Sol, PARNA do Monte Roraima, número de fotos e de registros independentes por espécie. '
+) 
+#kable_styling() %>% footnote(symbol = "Registrada somente nos censos")
+```
+
+De longe, a ave mais abundante foi *Leptotilla* sp (Fig. 1), no entanto, isso é um artefato já que praticamente todos os registros dessa espécie ocorreram numa mesma câmera que foi instalada em uma roça Ingarikó. A Figura 2 apresenta as abundâncias relativas das espécies excluindo *Leptotilla* sp.
+
+As armadilhas fotográficas não são muito eficientes para amostrar a avifauna, excetuando-se as espécies terrícolas médio e grande porte. Desta forma, esses resultados são apenas complementares ao inventário da avifauna realizado por métodos especializados.
+
+![Número de registros independentes por espécie de ave no no Wîi-tîî, Parque Nacional do Monte Roraima.](/home/elildojr/Documents/r/Uei-tepui/results/imgsPerSPAVES.jpg){ width=75% }
+
+![Número de registros independentes por espécie de ave excluindo *Leptotilla* sp no no Wîi-tîî, Parque Nacional do Monte Roraima.](/home/elildojr/Documents/r/Uei-tepui/results/imgsPerSp_No_Leptotilla.jpg){ width=75% }
+
+

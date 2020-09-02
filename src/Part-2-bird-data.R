@@ -24,14 +24,23 @@ source(here("bin", "funcao-para-grafico-composto.R"))
 wiiTiwi <- f.readin.fix.data(here("data", "Wild_ID_UeiTepui.csv"))
 
 
-# Only work with mammal photos
+# Only work with bird photos
 wiiTiwi <- filter(wiiTiwi, Class == "AVES")
-table(wiiTiwi$bin)
+photos <- as.data.frame(table(wiiTiwi$bin))
 
 # Group by events that are 30 minutes apart
 wiiTiwi <- f.separate.events(wiiTiwi, 30)
 wiiTiwi <- distinct(wiiTiwi, Camera.Trap.Name, bin, grp, .keep_all = TRUE)
-table(wiiTiwi$bin)
+records <- as.data.frame(table(wiiTiwi$bin))
+
+# create table for appendix of the report:
+tableAppendix <- cbind(photos[,1:2], records[,2]); names(tableAppendix) <- c("bin", "N.fotos", "N.registros")
+tableAppendix <- merge(tableAppendix, wiiTiwi[,c(12:13,32)], by="bin") # incluir Classe Ordem e Familia
+tableAppendix <- distinct(tableAppendix, .keep_all = TRUE)
+tableAppendix <- tableAppendix[,c(4:5,1:3)]
+names(tableAppendix) <- c("Ordem", "Família", "Espécie", "N.fotos", "N.registros")
+tableAppendix
+write.csv(tableAppendix, here("results", "tableAppendix.csv"), row.names = FALSE)
 
 # Number of images per camera trap
 imgsPerCT <- wiiTiwi %>% group_by(Camera.Trap.Name) %>% summarize(n = n()) %>% arrange(desc(n))
@@ -98,6 +107,7 @@ unique(wiiTiwi$bin)
 # How often they show up in the camera traps
 imgsPerSp <- wiiTiwi %>% group_by(bin) %>% summarize(n = n()) %>% arrange(desc(n))
 imgsPerSp
+imgsPerSp_No_Leptotilla <- imgsPerSp[-1,]
 
 write.csv(imgsPerSp, here("results", "imgsPerSpAVES.csv"))
 
@@ -119,6 +129,21 @@ p2
 jpeg(here("results", "imgsPerSPAVES.jpg"), width = 800, height = 600) # Open jpeg file
 p2
 dev.off()
+
+# plot imgsPerSp no Leptotilla
+p3 <- ggplot(imgsPerSp_No_Leptotilla, aes(x = reorder(bin, -n), y = n)) + geom_col() + theme(axis.text.x = element_text(angle = 90, hjust = 1)) + xlab("") + ylab("Número de registros") +
+  theme(panel.grid.minor = element_blank(), panel.background = element_blank(),
+        panel.border = element_rect(colour = "black", fill=NA, size=0.5)) +
+  theme(axis.text.x = element_text(size=14), axis.text.y = element_text(size=14)) +
+  theme(axis.title.x = element_text(size=20, margin=margin(t=10, r=0, b=0, l=0)),
+        axis.title.y = element_text(size=20, margin=margin(t=0, r=10, b=0, l=0)))
+p3
+
+# save as jpeg
+jpeg(here("results", "imgsPerSp_No_Leptotilla.jpg"), width = 800, height = 600) # Open jpeg file
+p3
+dev.off()
+
 
 # which spp were more recorded
 sort(imgsPerSp$n)
